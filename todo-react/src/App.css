@@ -1,0 +1,219 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-list {
+  margin-top: 5rem;
+  border-radius: 4px;
+  width: 50%;
+  padding: 5px;
+}
+
+.todo {
+  align-items: center;
+  color: #000;
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: 600;
+  justify-content: space-between;
+  padding: 5px 1rem;
+  margin-bottom: 3rem;
+  height: 5rem;
+  border-radius: 28px;
+  border: 1px solid #f6f5f5;
+  background: #ffffff;
+  box-shadow: 35px 35px 29px #d9d9d9, -35px -35px 29px #ffffff;
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.todo:hover {
+  cursor: pointer;
+  /* box-shadow: 0 0 1rem 5px rgba(0, 0, 0, 0.2); */
+  transform: scale(1.01);
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.deleteBtn:hover {
+  color: red;
+  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.complete:hover {
+  color: greenyellow;
+  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.formSection {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.actionButton {
+  display: flex;
+  justify-content: space-around;
+  width: 8rem;
+}
+.inputField {
+  margin-top: 2rem;
+  outline: none;
+  border: none;
+  height: 4rem;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px dotted black;
+  color: #000;
+  width: 100%;
+  font-size: 1.3rem;
+  padding-left: 1rem;
+}
+input::placeholder {
+  color: black;
+  text-align: center;
+}
+.headerName {
+  padding-top: 2rem;
+  padding-left: 1rem;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #fff;
+  background-color: #f3ec78;
+  background-image: linear-gradient(45deg, #f3ec78, #af4261);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  background-color: #f3ec78;
+}
+.submit {
+  padding: 0.7rem 3rem;
+  font-size: 1.5rem;
+  outline: none;
+  border: none;
+  color: #000;
+  text-transform: uppercase;
+  border-radius: 28px;
+  background: #ffffff;
+  box-shadow: 35px 35px 29px #d9d9d9, -35px -35px 29px #ffffff;
+  margin-top: 2.5rem;
+  width: 30%;
+  cursor: pointer;
+  border: 1px dashed #000;
+  transition: all 0.2s ease-out;
+}
+.submit:hover {
+  box-shadow: 15px 15px 29px #d9d9d9, -15px -15px 29px #ffffff;
+  transition: all 0.2s ease-in;
+}
+.completed {
+  text-decoration: line-through;
+}
+.signupContainer {
+  width: 60%;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 13px;
+  background: #ffffff;
+  box-shadow: 11px 11px 22px #b5b5b5, -11px -11px 22px #ffffff;
+  margin: 10rem auto;
+}
+.formContainer {
+  border-radius: 17px;
+  background: #fcfcfc;
+  height: auto;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+.completeMobile {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .formContainer {
+    width: 90%;
+  }
+  .formSection {
+    width: 90%;
+  }
+  .inputField {
+    max-width: 22rem;
+  }
+  .submit {
+    width: 80%;
+  }
+  .todo-list {
+    width: 90%;
+  }
+  .todo-item,
+  .completed {
+    font-weight: 300;
+  }
+  .complete {
+    display: none;
+  }
+  .completeMobile {
+    display: inline;
+  }
+}
+.formContainer .formLabel {
+  font-size: 1.5rem;
+  font-family: sans-serif;
+  font-weight: 600;
+}
+
+.formContainer .nameField {
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-family: sans-serif;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  outline: none;
+  padding: 3px 10px;
+}
+input.nameField::placeholder {
+  color: #24282b;
+  opacity: 0.5;
+}
+.enterButton {
+  margin-top: 0.5rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+  padding: 4px 11px;
+  border-radius: 8px;
+  font-weight: 400;
+}
+.username {
+  color: #000000;
+  font-size: 1.5rem;
+  display: flex;
+  align-self: flex-end;
+  padding-right: 2rem;
+  padding-top: 1rem;
+}
+.errorMsg {
+  color: red;
+}
+.formGroup {
+  width: 100%;
+}
+.disabledButton {
+  cursor: not-allowed;
+}
+.errmsg {
+  font-size: 1.4rem;
+  color: red;
+}
