@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 export default function Todo({ todo, handleRemove, completed }) {
+  console.log(todo)
   return (
     <div className="todo">
       <div className={todo.completed ? 'completed' : '' + 'todo-item'}>{todo.title}</div>
