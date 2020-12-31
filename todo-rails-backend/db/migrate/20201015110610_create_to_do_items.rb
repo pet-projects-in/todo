@@ -4,6 +4,7 @@ class CreateToDoItems < ActiveRecord::Migration[6.0]
       t.string :title, null: false
       t.boolean :completed, default: false
       t.string :user_id
+      t.integer :list_id
       t.timestamps
     end
   end

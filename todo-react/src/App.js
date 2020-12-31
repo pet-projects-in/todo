@@ -9,9 +9,21 @@ import TodoForm from "./components/TodoForm";
 function App() {
   const [todos, setTodos] = React.useState([]);
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [signup, setsignup] = useState(false);
+  const [shareableURL, setshareableURL] = useState(null);
 
   function closeModal() {
     setIsOpen(false);
+  }
+
+  async function getShareableLink() {
+    const url = await Axios.post(`http://localhost:3002/lists`, { id: userToken()});
+    await setshareableURL(`http://localhost:3002/lists/${url.data.url}`);
+    setURL()
+  }
+
+  function handleSignup() {
+    setsignup(true);
   }
 
   const removeTodo = async (id) => {
@@ -38,6 +50,7 @@ function App() {
   useEffect(() => {
     if (userToken().length > 0) {
       fetchTodos();
+      getURL() && setshareableURL(getURL());
     } else {
       setIsOpen(true);
     }
@@ -47,6 +60,14 @@ function App() {
     return window.localStorage.getItem("auth-token") || "";
   };
 
+  const setURL = () => {
+    return window.localStorage.setItem("listurl", shareableURL);
+
+  }
+  const getURL = () => {
+    return window.localStorage.getItem("listurl") || null
+  }
+
   const logout = () => {
     window.localStorage.clear();
     window.location = "/";
@@ -54,29 +75,32 @@ function App() {
   // console.warn(token.length == 0)
   return (
     <>
-      {modalIsOpen ? (
-        <UserSignin onRequestClose={closeModal} />
-      ) : (
-        <div className="app" id="modal">
-          <div onClick={logout}>Logout</div>
-          <div className="username">
-            {window.localStorage.getItem("username")}
+      {modalIsOpen ? (!signup ?
+        <UserSignin onRequestClose={closeModal} handleSignup={handleSignup} />
+        : < UserSignup onRequestClose={closeModal} />) : (
+          <div className="app" id="modal">
+            <a onClick={logout}>Logout</a>
+            {
+              shareableURL ? <h5>{shareableURL}</h5> : <a onClick={getShareableLink}>Create Shareable Link</a>
+            }
+            <div className="username">
+              {window.localStorage.getItem("username")}
+            </div>
+            <div className="headerName">ToDo App</div>
+            <TodoForm handleSubmit={handleSubmit} />
+            <div className="todo-list">
+              {todos.map((todo, index) => (
+                <Todo
+                  key={index}
+                  index={index}
+                  todo={todo}
+                  handleRemove={removeTodo}
+                  completed={completed}
+                />
+              ))}
+            </div>
           </div>
-          <div className="headerName">ToDo App</div>
-          <TodoForm handleSubmit={handleSubmit} />
-          <div className="todo-list">
-            {todos.map((todo, index) => (
-              <Todo
-                key={index}
-                index={index}
-                todo={todo}
-                handleRemove={removeTodo}
-                completed={completed}
-              />
-            ))}
-          </div>
-        </div>
-      )}
+        )}
     </>
   );
 }
@@ -151,7 +175,7 @@ const UserSignup = ({ modalIsOpen, onRequestClose }) => {
   );
 };
 
-const UserSignin = ({ modalIsOpen, onRequestClose }) => {
+const UserSignin = ({ modalIsOpen, onRequestClose, handleSignup }) => {
   const [err, setErr] = useState("");
   const [val, setVal] = useState({
     email: "",
@@ -211,6 +235,7 @@ const UserSignin = ({ modalIsOpen, onRequestClose }) => {
         </div>
       )}
       {err.length > 0 && <div className="errmsg">{err}</div>}
+      <button onClick={handleSignup}>SignUp Instead</button>
     </div>
   );
 };
